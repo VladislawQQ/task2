@@ -1,6 +1,7 @@
 package com.example.task2.data
 
 import androidx.lifecycle.MutableLiveData
+import com.example.task2.model.Contact
 import com.github.javafaker.Faker
 
 class ContactGenerator {

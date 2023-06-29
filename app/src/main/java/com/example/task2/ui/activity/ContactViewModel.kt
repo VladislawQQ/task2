@@ -1,9 +1,9 @@
-package com.example.task2.model
+package com.example.task2.ui.activity
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.task2.data.Contact
+import com.example.task2.model.Contact
 
 class ContactViewModel : ViewModel() {
 

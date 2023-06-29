@@ -1,4 +1,4 @@
-package com.example.task2.data
+package com.example.task2.model
 
 data class Contact (
     var id: Long,

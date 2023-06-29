@@ -3,17 +3,15 @@ package com.example.task2.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.task2.R
-import com.example.task2.adapter.ContactActionListener
-import com.example.task2.adapter.ContactAdapter
-import com.example.task2.data.Contact
+import com.example.task2.ui.adapter.ContactActionListener
+import com.example.task2.ui.adapter.ContactAdapter
+import com.example.task2.model.Contact
 import com.example.task2.databinding.ActivityMainBinding
-import com.example.task2.model.ContactViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {

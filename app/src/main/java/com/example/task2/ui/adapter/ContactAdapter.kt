@@ -1,4 +1,4 @@
-package com.example.task2.adapter
+package com.example.task2.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.task2.R
-import com.example.task2.data.Contact
+import com.example.task2.model.Contact
 import com.example.task2.databinding.ContactItemBinding
 import com.example.task2.utils.diffUtil.ContactDiffUtil
 import com.example.task2.utils.ext.setContactPhoto

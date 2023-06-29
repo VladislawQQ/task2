@@ -1,7 +1,7 @@
 package com.example.task2.utils.diffUtil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.task2.data.Contact
+import com.example.task2.model.Contact
 
 class ContactDiffUtil : DiffUtil.ItemCallback<Contact>() {
     override fun areItemsTheSame(oldItem: Contact, newItem: Contact)
