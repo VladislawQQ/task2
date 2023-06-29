@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_big">24dp</dimen>
+    <dimen name="margin_large">36dp</dimen>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_big">24dp</dimen>
+    <dimen name="padding_large">36dp</dimen>
+
+    <dimen name="guide_line_margin">16dp</dimen>
+    <dimen name="border_stroke_width">2dp</dimen>
+    <dimen name="border_corner_radius">6dp</dimen>
+
+    <!-- contact item -->
+
+    <dimen name="contact_item_profile_photo_size">50dp</dimen>
+    <dimen name="contact_item_icon_delete_size">35dp</dimen>
+
+</resources>

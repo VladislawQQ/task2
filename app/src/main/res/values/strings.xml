@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">task2</string>
+    <string name="name_surname">Name Surname</string>
+    <string name="career">Career</string>
+    <string name="add_contacts">Add contacts</string>
+    <string name="contacts">Contacts</string>
+
+    <string name="message_delete">Contact has been deleted</string>
+    <string name="message_add_contact">Contact has been deleted</string>
+    <string name="snackbar_action">UNDO</string>
+</resources>
