@@ -1,19 +1,26 @@
 package com.example.task2.ui.activity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.task2.model.Contact
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ContactViewModel : ViewModel() {
 
-    private val _contacts = MutableLiveData<List<Contact>>(emptyList())
-    val contacts : LiveData<List<Contact>> = _contacts
+    private val _contacts = MutableStateFlow<List<Contact>>(emptyList())
+    val contacts : StateFlow<List<Contact>> = _contacts
 
     private val contactService = ContactService()
 
     init {
-        _contacts.value = contactService.getContacts()
+        viewModelScope.launch {
+            contactService.getContacts().collectLatest { contactList ->
+                _contacts.value = contactList
+            }
+        }
     }
 
     fun getContact(index: Int): Contact = contactService.getContact(index)

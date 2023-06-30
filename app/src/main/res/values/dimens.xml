@@ -19,5 +19,7 @@
 
     <dimen name="contact_item_profile_photo_size">50dp</dimen>
     <dimen name="contact_item_icon_delete_size">35dp</dimen>
+    <dimen name="text_size_name">18sp</dimen>
+    <dimen name="text_size_career">12sp</dimen>
 
 </resources>

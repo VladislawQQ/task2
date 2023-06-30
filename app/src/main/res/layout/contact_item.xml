@@ -36,19 +36,21 @@
         android:id="@+id/text_view_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/open_sans_font"
 
         android:text="@string/name_surname"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="@dimen/text_size_name" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_view_career"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/open_sans_font"
 
         android:text="@string/career"
         android:textColor="@color/gray_text"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_career"
 
         app:layout_constraintStart_toStartOf="@+id/text_view_name"
         app:layout_constraintTop_toBottomOf="@id/text_view_name" />

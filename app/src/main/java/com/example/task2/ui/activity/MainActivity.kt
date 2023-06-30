@@ -3,16 +3,20 @@ package com.example.task2.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.task2.R
+import com.example.task2.databinding.ActivityMainBinding
+import com.example.task2.model.Contact
 import com.example.task2.ui.adapter.ContactActionListener
 import com.example.task2.ui.adapter.ContactAdapter
-import com.example.task2.model.Contact
-import com.example.task2.databinding.ActivityMainBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        observeViewModel()
         bindRecycleView()
+        observeViewModel()
         addSwipeToDelete()
     }
 
@@ -46,8 +50,6 @@ class MainActivity : AppCompatActivity() {
                 val contact: Contact = contactViewModel.getContact(index)
 
                 contactViewModel.deleteContact(contact)
-//                adapter.notifyItemRemoved(index)
-
                 showDeleteMessage(index, contact)
             }
         }).attachToRecyclerView(binding.recyclerView)
@@ -57,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         adapter = ContactAdapter(contactActionListener = object : ContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 val index = contactViewModel.deleteContact(contact)
-
-                adapter.notifyItemRemoved(index)
                 showDeleteMessage(index, contact)
             }
         })
@@ -70,16 +70,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDeleteMessage(index: Int, contact: Contact) {
         Snackbar.make(binding.root, R.string.message_delete, Snackbar.LENGTH_LONG)
-            .setAction(R.string.snackbar_action) {
+            .setAction(getString(R.string.snackbar_action).uppercase()) {
                 contactViewModel.addContact(index, contact)
-//                adapter.notifyItemInserted(index)
             }
             .show()
     }
 
     private fun observeViewModel() {
-        contactViewModel.contacts.observe(this) {
-            adapter.submitList(it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                contactViewModel.contacts.collect {
+                    adapter.submitList(it)
+                }
+            }
         }
     }
 }

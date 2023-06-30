@@ -1,16 +1,17 @@
-package com.example.task2.data
+package com.example.task2.ui.adapter.data
 
 import androidx.lifecycle.MutableLiveData
 import com.example.task2.model.Contact
 import com.github.javafaker.Faker
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class ContactGenerator {
     private val faker = Faker.instance()
     private val contactsLiveData = MutableLiveData<List<Contact>>(emptyList())
 
-    fun generateContacts(): MutableLiveData<List<Contact>> {
-        return MutableLiveData(
-            List(50) { index -> randomContact(id = index.toLong()) }
+    fun generateContacts(): MutableStateFlow<List<Contact>> {
+        return MutableStateFlow(
+            List(12) { index -> randomContact(id = index + 1L) }
         )
     }
 
