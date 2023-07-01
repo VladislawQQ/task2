@@ -1,6 +1,9 @@
 package com.example.task2.ui.adapter.data
 
+import android.annotation.SuppressLint
+import android.provider.ContactsContract
 import androidx.lifecycle.MutableLiveData
+import com.example.task2.App
 import com.example.task2.model.Contact
 import com.github.javafaker.Faker
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +35,42 @@ class ContactGenerator {
             career = faker.job().position(),
             photo = IMAGES[id.toInt() % IMAGES.size]
         )
+    }
+
+    @SuppressLint("Range")
+    fun getPhoneContacts(): MutableStateFlow<List<Contact>> {
+
+        val contacts = MutableStateFlow<List<Contact>>(emptyList())
+        val contactList : MutableList<Contact> = ArrayList()
+
+        val contentResolver = App.instance.contentResolver
+        val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+
+        val cursor = contentResolver.query(uri,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        if (cursor != null && cursor.count > 0) {
+            var id : Long = 0
+
+            while (cursor.moveToNext()) {
+                // TODO: пограйся з цим індекс і зроби норм
+                val index = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
+                val name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
+                val contact = Contact(id, "", name, "")
+                id++
+
+                contactList.add(contact)
+            }
+            contacts.value = contactList
+        }
+        cursor?.close()
+
+        return contacts
     }
 
     companion object {

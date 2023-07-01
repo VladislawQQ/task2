@@ -6,4 +6,20 @@
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
     </style>
 
+    <style name="TextColor" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/gray_edit_text</item>
+        <item name="colorControlActivated">@color/gray_edit_text</item>
+    </style>
+
+    <style name="edit_text_auth_activity">
+        <item name="android:theme">@style/TextColor</item>
+        <item name="barrierDirection">bottom</item>
+        <item name="hintAnimationEnabled">@string/name_surname</item>
+        <item name="hintEnabled">false</item>
+        <item name="hintTextColor">@color/gray_edit_text</item>
+        <item name="expandedHintEnabled">true</item>
+        <item name="android:textColorHint">@color/gray_edit_text</item>
+        <item name="boxBackgroundMode">none</item>
+    </style>
+
 </resources>

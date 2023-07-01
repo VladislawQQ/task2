@@ -8,4 +8,6 @@
     <string name="message_delete">Contact has been deleted</string>
     <string name="message_add_contact">Contact has been deleted</string>
     <string name="snackbar_action">UNDO</string>
+    <string name="add_contact">Add contact</string>
+    <string name="save">Save</string>
 </resources>

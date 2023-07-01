@@ -11,7 +11,11 @@ class ContactService {
 
     init {
         if (contacts.value.isEmpty()) {
-            contacts = contactProvider.generateContacts()
+            val contactsPhone = contactProvider.getPhoneContacts()
+
+            contacts =
+                if (contactsPhone.value.isNotEmpty()) contactsPhone
+                    else contactProvider.generateContacts()
         }
     }
 
@@ -45,4 +49,6 @@ class ContactService {
     fun getContacts(): MutableStateFlow<List<Contact>> {
         return contacts
     }
+
+
 }
