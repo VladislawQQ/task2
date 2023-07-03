@@ -20,3 +20,12 @@ fun AppCompatImageView.setContactPhoto(contactPhotoUri: String) {
         .apply(GLIDE_OPTIONS)
         .into(this)
 }
+
+fun AppCompatImageView.setDefaultPhoto() {
+    val contactPhotoUri = resources.getIdentifier("profile_photo", "drawable", context.packageName)
+
+    Glide.with(context)
+        .load(contactPhotoUri)
+        .apply(GLIDE_OPTIONS)
+        .into(this)
+}

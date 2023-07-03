@@ -20,6 +20,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:hardwareAccelerated="false"
+            android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

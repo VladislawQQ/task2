@@ -2,7 +2,6 @@ package com.example.task2.ui.adapter.data
 
 import android.annotation.SuppressLint
 import android.provider.ContactsContract
-import androidx.lifecycle.MutableLiveData
 import com.example.task2.App
 import com.example.task2.model.Contact
 import com.github.javafaker.Faker
@@ -10,7 +9,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class ContactGenerator {
     private val faker = Faker.instance()
-    private val contactsLiveData = MutableLiveData<List<Contact>>(emptyList())
+    private val contactsFlow = MutableStateFlow<List<Contact>>(emptyList())
 
     fun generateContacts(): MutableStateFlow<List<Contact>> {
         return MutableStateFlow(
@@ -18,13 +17,12 @@ class ContactGenerator {
         )
     }
 
-    // use in dialog fragment
     fun createContact(userName: String, career: String): Contact {
         return Contact(
-            id = contactsLiveData.value!!.size + 1L,
-            name = userName,
+            id = contactsFlow.value.size + 1L,
+            name = if (userName == "") faker.name().fullName() else userName,
             career = career,
-            photo = IMAGES[contactsLiveData.value!!.size % IMAGES.size]
+            photo = ""
         )
     }
 
@@ -55,11 +53,9 @@ class ContactGenerator {
         )
 
         if (cursor != null && cursor.count > 0) {
-            var id : Long = 0
+            var id = 0L
 
             while (cursor.moveToNext()) {
-                // TODO: пограйся з цим індекс і зроби норм
-                val index = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.CONTACT_ID))
                 val name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
                 val contact = Contact(id, "", name, "")
                 id++

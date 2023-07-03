@@ -11,11 +11,15 @@ class ContactService {
 
     init {
         if (contacts.value.isEmpty()) {
-            val contactsPhone = contactProvider.getPhoneContacts()
+            var contactsPhone = MutableStateFlow<List<Contact>>(emptyList())
+            try {
+                contactsPhone = contactProvider.getPhoneContacts()
+            } catch (_: Exception) {}
 
             contacts =
-                if (contactsPhone.value.isNotEmpty()) contactsPhone
-                    else contactProvider.generateContacts()
+//                if (contactsPhone.value.isNotEmpty()) contactsPhone
+//                    else
+                        contactProvider.generateContacts()
         }
     }
 

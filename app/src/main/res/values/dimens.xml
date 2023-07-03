@@ -27,6 +27,7 @@
     <dimen name="contact_item_icon_delete_size">35dp</dimen>
     <dimen name="text_size_name">18sp</dimen>
     <dimen name="text_size_career">12sp</dimen>
+    <dimen name="text_size_add_contact">18sp</dimen>
 
     <!-- dialog add contact -->
     <dimen name="dialog_add_contact_profile_photo_size">80dp</dimen>

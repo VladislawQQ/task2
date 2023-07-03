@@ -11,69 +11,74 @@
         android:layout_height="0dp"
         android:background="@color/view_color"
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.25"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintGuide_begin="@dimen/guide_line_margin"
         android:orientation="vertical"
-        />
+        app:layout_constraintGuide_begin="@dimen/guide_line_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_end"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintGuide_end="@dimen/guide_line_margin"
         android:orientation="vertical"
-        />
+        app:layout_constraintGuide_end="@dimen/guide_line_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintGuide_begin="@dimen/guide_line_margin"
         android:orientation="horizontal"
-        />
+        app:layout_constraintGuide_begin="@dimen/guide_line_margin" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintGuide_end="@dimen/guide_line_margin"
         android:orientation="horizontal"
-        />
-
+        app:layout_constraintGuide_end="@dimen/guide_line_margin" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/set_photo_image_view"
+        android:layout_width="@dimen/dialog_set_profile_photo_size"
+        android:layout_height="@dimen/dialog_set_profile_photo_size"
+        android:layout_marginStart="@dimen/dialog_set_profile_photo_margin_start"
+
+        android:src="@drawable/ic_set_photo"
+
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
+        app:layout_constraintStart_toEndOf="@id/profile_photo_image_view"
+        app:layout_constraintTop_toBottomOf="@id/add_contact_text_view" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ic_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
 
-        app:layout_constraintTop_toTopOf="@id/content_top"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        />
+        app:layout_constraintTop_toTopOf="@id/content_top" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/add_contact_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textAppearance="@style/open_sans_font"
         android:text="@string/add_contact"
+        android:textAppearance="@style/open_sans_font"
 
-        android:textSize="24sp"
         android:textColor="@color/white"
+        android:textSize="@dimen/text_size_name"
 
-        app:layout_constraintTop_toTopOf="@id/content_top"
         app:layout_constraintEnd_toEndOf="@id/content_end"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        />
+        app:layout_constraintTop_toTopOf="@id/content_top" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/profile_photo_image_view"
@@ -81,178 +86,151 @@
         android:layout_height="@dimen/dialog_add_contact_profile_photo_size"
         android:src="@drawable/profile_photo"
 
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/top_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_contact_text_view"
-        app:layout_constraintBottom_toBottomOf="@id/top_view"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_contact_text_view" />
 
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_data_containers"
+    <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="username_container, career_container,
-        email_container, phone_container, address_container, date_of_birth_container"
 
-        app:flow_verticalGap="@dimen/margin_big"
-        android:orientation="vertical"
-        app:flow_verticalStyle="packed"
-        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintVertical_chainStyle="spread_inside"
 
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintBottom_toTopOf="@id/save_button"
         app:layout_constraintEnd_toEndOf="@id/content_end"
-        />
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/top_view">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
-        android:hint="@string/name_surname"
-        app:helperTextTextColor="@color/color_error_msg">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/username_edit_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name_surname"
-            android:textColorHint="@color/gray_text"
-            android:lines="1"
+            android:orientation="vertical">
 
-            android:textColor="@color/color_edit_text" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/name_surname"
+                app:helperTextTextColor="@color/color_error_msg">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/name_surname"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/career_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
+                    android:textColorHint="@color/gray_text" />
 
-        android:hint="@string/career"
-        tools:ignore="MissingConstraints">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/career_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/career"
-            android:lines="1"
-            android:textColorHint="@color/gray_text"
-            android:textColor="@color/color_edit_text"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/career_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/career"
+                tools:ignore="MissingConstraints">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/career_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/career"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
+                    android:textColorHint="@color/gray_text" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
+            </com.google.android.material.textfield.TextInputLayout>
 
-        android:hint="@string/career"
-        tools:ignore="MissingConstraints">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/email"
+                tools:ignore="MissingConstraints">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/career"
-            android:lines="1"
-            android:textColorHint="@color/gray_text"
-            android:textColor="@color/color_edit_text"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
+                    android:textColorHint="@color/gray_text" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phone_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phone_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/phone"
+                tools:ignore="MissingConstraints">
 
-        android:hint="@string/career"
-        tools:ignore="MissingConstraints">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
+                    android:textColorHint="@color/gray_text" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phone_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/career"
-            android:lines="1"
-            android:textColorHint="@color/gray_text"
-            android:textColor="@color/color_edit_text"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/address"
+                tools:ignore="MissingConstraints">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/address_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/address"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
+                    android:textColorHint="@color/gray_text" />
 
-        android:hint="@string/career"
-        tools:ignore="MissingConstraints">
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/address_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/career"
-            android:lines="1"
-            android:textColorHint="@color/gray_text"
-            android:textColor="@color/color_edit_text"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/date_of_birth_container"
+                style="@style/edit_text_auth_activity"
+                android:hint="@string/date_of_birth"
+                tools:ignore="MissingConstraints">
 
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/date_of_birth_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/date_of_birth"
+                    android:lines="1"
+                    android:textColor="@color/color_edit_text"
+                    android:textColorHint="@color/gray_text" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/date_of_birth_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/edit_text_auth_activity"
+            </com.google.android.material.textfield.TextInputLayout>
 
-        android:hint="@string/career"
-        tools:ignore="MissingConstraints">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/date_of_birth_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/career"
-            android:lines="1"
-            android:textColorHint="@color/gray_text"
-            android:textColor="@color/color_edit_text"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/set_photo_image_view"
-        android:layout_width="@dimen/dialog_set_profile_photo_size"
-        android:layout_height="@dimen/dialog_set_profile_photo_size"
-        android:src="@drawable/ic_set_photo"
-
-        android:layout_marginStart="@dimen/dialog_set_profile_photo_margin_start"
-
-        app:layout_constraintStart_toEndOf="@id/profile_photo_image_view"
-        app:layout_constraintTop_toBottomOf="@id/add_contact_text_view"
-        app:layout_constraintBottom_toBottomOf="@id/top_view"/>
+        </LinearLayout>
+    </ScrollView>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium"
         android:background="@drawable/save_button"
 
         android:text="@string/save"
         android:textAllCaps="true"
-        android:textSize="@dimen/dialog_save_button_text_size"
-        android:textColor="@color/white"
         android:textAppearance="@style/open_sans_font"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dialog_save_button_text_size"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/scroll_view"
+        app:layout_constraintBottom_toBottomOf="@id/content_bottom"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

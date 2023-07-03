@@ -85,6 +85,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/add_contact_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/add_contacts"
