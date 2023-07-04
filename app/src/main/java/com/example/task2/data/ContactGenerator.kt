@@ -1,9 +1,9 @@
-package com.example.task2.ui.adapter.data
+package com.example.task2.data
 
 import android.annotation.SuppressLint
 import android.provider.ContactsContract
 import com.example.task2.App
-import com.example.task2.model.Contact
+import com.example.task2.data.model.Contact
 import com.github.javafaker.Faker
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -13,14 +13,18 @@ class ContactGenerator {
 
     fun generateContacts(): MutableStateFlow<List<Contact>> {
         return MutableStateFlow(
-            List(12) { index -> randomContact(id = index + 1L) }
-        )
+            List(15) { index -> randomContact(id = index + 1L) }    //todo number of contacts -> to const, contacts must have UUID
+            // UUID.randomUUID().mostSignificantBits
+            )
     }
 
-    fun createContact(userName: String, career: String): Contact {
+    fun createContact(
+        userName: String = faker.name().fullName(),
+        career: String
+    ): Contact {
         return Contact(
             id = contactsFlow.value.size + 1L,
-            name = if (userName == "") faker.name().fullName() else userName,
+            name = userName,
             career = career,
             photo = ""
         )
@@ -41,7 +45,7 @@ class ContactGenerator {
         val contacts = MutableStateFlow<List<Contact>>(emptyList())
         val contactList : MutableList<Contact> = ArrayList()
 
-        val contentResolver = App.instance.contentResolver
+        val contentResolver = App.contentResolverInstance
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
 
         val cursor = contentResolver.query(uri,
@@ -52,6 +56,7 @@ class ContactGenerator {
             null
         )
 
+        //todo cursor?.use{}
         if (cursor != null && cursor.count > 0) {
             var id = 0L
 

@@ -5,14 +5,14 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.task2.data.ContactGenerator
+import com.example.task2.data.model.Contact
 import com.example.task2.databinding.DialogAddContactBinding
-import com.example.task2.model.Contact
-import com.example.task2.ui.adapter.data.ContactGenerator
-import com.example.task2.utils.ext.setDefaultPhoto
+import com.example.task2.ui.utils.ext.setContactPhoto
 
 class AddContactDialogFragment : DialogFragment() {
 
-    interface ConfirmationListener {
+    interface ConfirmationListener {        //todo interface -> separate file
         fun onConfirmButtonClicked(contact: Contact)
     }
 
@@ -29,7 +29,7 @@ class AddContactDialogFragment : DialogFragment() {
         saveButtonListener()
 
 
-        _binding.profilePhotoImageView.setDefaultPhoto()
+        _binding.profilePhotoImageView.setContactPhoto()
         builder.setView(_binding.root)
         return builder.create()
     }

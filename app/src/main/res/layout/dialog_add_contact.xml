@@ -16,6 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- todo: gidelines -> delete  -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_start"
         android:layout_width="0dp"
@@ -44,6 +45,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="@dimen/guide_line_margin" />
 
+    <!-- todo: re-arange views  -->
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/set_photo_image_view"
         android:layout_width="@dimen/dialog_set_profile_photo_size"
@@ -91,6 +93,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_contact_text_view" />
 
+    <!-- todo: move all this screen to scroll and delete scrol here  -->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="0dp"
@@ -191,7 +194,8 @@
                     android:hint="@string/address"
                     android:lines="1"
                     android:textColor="@color/color_edit_text"
-                    android:textColorHint="@color/gray_text" />
+                    android:textColorHint="@color/gray_text"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,7 +212,8 @@
                     android:hint="@string/date_of_birth"
                     android:lines="1"
                     android:textColor="@color/color_edit_text"
-                    android:textColorHint="@color/gray_text" />
+                    android:textColorHint="@color/gray_text"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

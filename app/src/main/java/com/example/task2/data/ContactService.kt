@@ -1,12 +1,12 @@
-package com.example.task2.ui.activity
+package com.example.task2.data
 
-import com.example.task2.model.Contact
-import com.example.task2.ui.adapter.data.ContactGenerator
+import android.util.Log
+import com.example.task2.data.model.Contact
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ContactService {
 
-    private var contacts = MutableStateFlow<List<Contact>>(emptyList())
+    var contacts = MutableStateFlow<List<Contact>>(emptyList())
     private val contactProvider = ContactGenerator()
 
     init {
@@ -14,11 +14,13 @@ class ContactService {
             var contactsPhone = MutableStateFlow<List<Contact>>(emptyList())
             try {
                 contactsPhone = contactProvider.getPhoneContacts()
-            } catch (_: Exception) {}
+            } catch (e: Exception) {        //todo runtime permissions
+                Log.d("myLog", "Catch! ${e.message}")
+            }
 
             contacts =
-//                if (contactsPhone.value.isNotEmpty()) contactsPhone
-//                    else
+                if (contactsPhone.value.isNotEmpty()) contactsPhone
+                    else
                         contactProvider.generateContacts()
         }
     }
@@ -50,9 +52,9 @@ class ContactService {
         return contacts.value[index]
     }
 
-    fun getContacts(): MutableStateFlow<List<Contact>> {
-        return contacts
-    }
+//    fun getContacts(): MutableStateFlow<List<Contact>> {
+//        return contacts
+//    }
 
 
 }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.task2.R
 import com.example.task2.databinding.ActivityMainBinding
-import com.example.task2.model.Contact
+import com.example.task2.data.model.Contact
 import com.example.task2.ui.adapter.ContactActionListener
 import com.example.task2.ui.adapter.ContactAdapter
 import com.example.task2.ui.fragment.AddContactDialogFragment
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), AddContactDialogFragment.ConfirmationL
         observeViewModel()
         addSwipeToDelete()
 
-        binding.addContactTextView.setOnClickListener {
+        binding.addContactTextView.setOnClickListener {     //todo to addListeners(), logic -> fun
             val addContactDialogFragment = AddContactDialogFragment()
             addContactDialogFragment.show(supportFragmentManager, AddContactDialogFragment.TAG)
         }
@@ -46,22 +46,26 @@ class MainActivity : AppCompatActivity(), AddContactDialogFragment.ConfirmationL
     private fun bindRecycleView() {
         adapter = ContactAdapter(contactActionListener = object : ContactActionListener {
             override fun onContactDelete(contact: Contact) {
-                val index = contactViewModel.deleteContact(contact)
-                Log.d("delete index", index.toString())
+                val index = contactViewModel.deleteContact(contact)     //todo logic -> viewModel
+                Log.d("delete index", index.toString())             //todo extension fun (and tag to const)
                 showDeleteMessage(index, contact)
             }
         })
 
-        val layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = adapter
+        val recyclerLayoutManager = LinearLayoutManager(this)
+        with(binding){
+            recyclerView.layoutManager = recyclerLayoutManager
+            recyclerView.adapter = adapter
+        }
+
     }
 
     private fun observeViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 contactViewModel.contacts.collect {
-                    adapter.submitList(it.toMutableList())
+                    adapter.submitList(it)
+                    Log.d("myLog", "list ${it.size}")
                 }
             }
         }
@@ -90,8 +94,8 @@ class MainActivity : AppCompatActivity(), AddContactDialogFragment.ConfirmationL
     private fun showDeleteMessage(index: Int, contact: Contact) {
         Snackbar.make(binding.root, R.string.message_delete, Snackbar.LENGTH_LONG)
             .setAction(getString(R.string.snackbar_action).uppercase()) {
-                contactViewModel.addContact(index, contact)
-                Log.d("add index", index.toString())
+                contactViewModel.addContact(index, contact)    //todo logic -> viewModel
+                Log.d("add index", "add index: $index")
             }.setActionTextColor(ContextCompat.getColor(applicationContext, R.color.purple_500))
             .setTextColor(ContextCompat.getColor(applicationContext, R.color.light_gray))
             .show()

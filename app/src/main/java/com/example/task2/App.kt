@@ -1,6 +1,7 @@
 package com.example.task2
 
 import android.app.Application
+import android.content.ContentResolver
 
 class App : Application() {
 
@@ -11,6 +12,6 @@ class App : Application() {
 
     companion object {
         private lateinit var app: App
-        val instance: App get() = app
+        val contentResolverInstance: ContentResolver get() = app.contentResolver
     }
 }
