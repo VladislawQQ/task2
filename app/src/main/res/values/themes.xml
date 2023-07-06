@@ -1,17 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.Task2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <!-- todo: read about Material Design -->
-
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/view_color</item>
-        <item name="colorPrimaryVariant">@color/gray_text</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/text_input_layout_hint</item>
+        <item name="colorOnPrimary">@color/label_text_color</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/view_color_night</item>
-        <item name="colorSecondaryVariant">@color/gray_text_night</item>
-        <item name="colorOnSecondary">@color/light_gray</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimary</item>
         <!-- Customize your theme here. -->

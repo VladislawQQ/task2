@@ -1,30 +1,29 @@
 package com.example.task2.data
 
-import android.annotation.SuppressLint
 import android.provider.ContactsContract
 import com.example.task2.App
 import com.example.task2.data.model.Contact
 import com.github.javafaker.Faker
 import kotlinx.coroutines.flow.MutableStateFlow
+import java.util.Random
+import java.util.UUID
 
 class ContactGenerator {
     private val faker = Faker.instance()
-    private val contactsFlow = MutableStateFlow<List<Contact>>(emptyList())
 
     fun generateContacts(): MutableStateFlow<List<Contact>> {
         return MutableStateFlow(
-            List(15) { index -> randomContact(id = index + 1L) }    //todo number of contacts -> to const, contacts must have UUID
-            // UUID.randomUUID().mostSignificantBits
+            List(15) { randomContact(id = UUID.randomUUID().mostSignificantBits) }
             )
     }
 
     fun createContact(
-        userName: String = faker.name().fullName(),
+        userName: String,
         career: String
     ): Contact {
         return Contact(
-            id = contactsFlow.value.size + 1L,
-            name = userName,
+            id = UUID.randomUUID().mostSignificantBits,
+            name = userName.ifBlank { faker.name().fullName() },
             career = career,
             photo = ""
         )
@@ -35,11 +34,10 @@ class ContactGenerator {
             id = id,
             name = faker.name().fullName(),
             career = faker.job().position(),
-            photo = IMAGES[id.toInt() % IMAGES.size]
+            photo = IMAGES[Random().nextInt(IMAGES.size - 1)]
         )
     }
 
-    @SuppressLint("Range")
     fun getPhoneContacts(): MutableStateFlow<List<Contact>> {
 
         val contacts = MutableStateFlow<List<Contact>>(emptyList())
@@ -56,20 +54,20 @@ class ContactGenerator {
             null
         )
 
-        //todo cursor?.use{}
-        if (cursor != null && cursor.count > 0) {
-            var id = 0L
+        cursor?.use {
+            if (cursor.count > 0) {
+                var id = 0L
 
-            while (cursor.moveToNext()) {
-                val name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val contact = Contact(id, "", name, "")
-                id++
+                while (cursor.moveToNext()) {
+                    val name = cursor.use { ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME }
+                    val contact = Contact(id, "", name, "")
+                    id++
 
-                contactList.add(contact)
+                    contactList.add(contact)
+                }
+                contacts.value = contactList
             }
-            contacts.value = contactList
         }
-        cursor?.close()
 
         return contacts
     }

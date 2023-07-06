@@ -38,20 +38,24 @@ android {
 
 dependencies {
 
-    //todo: comments!
-
+    // Core
     implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    // Test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    // Glide for images
     implementation 'com.github.bumptech.glide:glide:4.15.1'
+
+    // Faker for fake data
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
+    // View model
     implementation "androidx.activity:activity-ktx:1.7.2"
     implementation "androidx.fragment:fragment-ktx:1.6.0"
 }

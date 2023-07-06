@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Task2"
         android:name=".App"
-        tools:targetApi="32">
+        tools:targetApi="33">
         <activity
-            android:name=".ui.activity.MainActivity"
+            android:name=".ui.activity.ContactsActivity"
             android:hardwareAccelerated="false"
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:exported="true">

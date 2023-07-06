@@ -4,14 +4,14 @@
     android:shape="rectangle">
 
     <stroke
-        android:width="@dimen/border_stroke_width"
-        android:color="@color/gray_text">
+        android:width="2dp"
+        android:color="#B2B2B3">
     </stroke>
 
     <solid android:color="@android:color/transparent"/>
 
     <corners
-        android:radius="@dimen/border_corner_radius">
+        android:radius="6dp">
     </corners>
 
 </shape>

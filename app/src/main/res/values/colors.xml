@@ -1,29 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- todo: unused -> delete -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <color name="main_text_color">#FFFFFFFF</color>
+    <color name="contact_item_name_color">#FF000000</color>
+    <color name="label_text_color">#FFFFFFFF</color>
     <color name="view_color">#242235</color>
-    <color name="light_gray">#D3D3D3</color>
-    <color name="orange">#FB5E06</color>
-    <color name="gray_text">#B2B2B3</color>
-    <color name="gray_edit_text">#BDBDBD</color>
-    <color name="color_edit_text">#E0E0E0</color>
-    <color name="color_error_msg">#F93E3E</color>
-    <color name="google_btn_text">#18181F</color>
-
-    <color name="main_text_color_night">#B2B2B3</color>
-    <color name="gray_text_night">#606061</color>
-    <color name="view_color_night">#000021</color>
-    <color name="orange_night">#AC4423</color>
-    <color name="google_btn_night">#00332E</color>
-    <color name="text_color_night">#1774A8</color>
-    <color name="auth_sign_in_color_night">#35A4A8</color>
+    <color name="text_input_layout_hint">#B2B2B3</color>
+    <color name="contact_item_career_color">#B2B2B3</color>
+    <color name="contacts_activity_class_snackbar_text_color">#B2B2B3</color>
+    <color name="contacts_activity_class_snackbar_undo_color">#FF6200EE</color>
 </resources>

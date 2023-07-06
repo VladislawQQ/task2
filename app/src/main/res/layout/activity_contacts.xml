@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
-
-    <!-- todo: id naming -> one style  -->
+    tools:context=".ui.activity.ContactsActivity">
 
     <View
-        android:id="@+id/top_view"
+        android:id="@+id/view_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/view_color"
@@ -20,101 +18,100 @@
         app:layout_constraintHeight_percent="0.2"
         />
 
-    <!-- todo: use guideline with percent  -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04136253" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_end"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintGuide_end="@dimen/guide_line_margin"
         android:orientation="vertical"
-        />
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.023255814" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.97811216" />
+        app:layout_constraintGuide_percent="0.97" />
 
-
-    <!-- todo: chain + button back  -->
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/activity_contacts_image_view_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_back"
 
-        app:layout_constraintTop_toTopOf="@id/content_top"
+        app:layout_constraintTop_toTopOf="@id/text_view_contacts"
+        app:layout_constraintBottom_toBottomOf="@id/text_view_contacts"
         app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintEnd_toStartOf="@id/text_view_contacts"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view_contacts"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/contacts"
 
         android:textAppearance="@style/open_sans_font"
-        android:textSize="24sp"
-        android:textColor="@color/white"
+        android:textSize="@dimen/activity_contacts_text_size_contacts_label"
+        android:textColor="@color/label_text_color"
 
         app:layout_constraintTop_toTopOf="@id/content_top"
-        app:layout_constraintEnd_toEndOf="@id/content_end"
-        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintStart_toEndOf="@id/activity_contacts_image_view_back"
+        app:layout_constraintEnd_toStartOf="@id/image_view_search"
          />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_view_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_search"
 
-        app:layout_constraintTop_toTopOf="@id/content_top"
+        app:layout_constraintTop_toTopOf="@+id/text_view_contacts"
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_contacts"
+        app:layout_constraintStart_toEndOf="@+id/text_view_contacts"
         app:layout_constraintEnd_toEndOf="@id/content_end"
         />
 
-    <!-- todo: dimens  -->
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/add_contact_text_view"
+        android:id="@+id/text_view_add_contact"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_contacts"
-        android:textAppearance="@style/open_sans_font"
+        android:layout_marginBottom="@dimen/margin_big"
 
-        android:textSize="14sp"
-        android:textColor="@color/white"
-        android:layout_marginBottom="24dp"
+        android:textAppearance="@style/open_sans_font"
+        android:text="@string/add_contacts"
+        android:textSize="@dimen/contact_item_text_size_add_contact"
+        android:textColor="@color/label_text_color"
 
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintBottom_toBottomOf="@+id/top_view"
+        app:layout_constraintBottom_toBottomOf="@+id/view_top"
         />
 
-    <!-- todo: bias  -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_contacts"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:background="@color/label_text_color"
+        android:layout_marginTop="@dimen/margin_medium"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="@id/content_bottom"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/view_top"
         tools:listitem="@layout/contact_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

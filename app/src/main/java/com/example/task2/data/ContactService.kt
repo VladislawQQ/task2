@@ -14,7 +14,7 @@ class ContactService {
             var contactsPhone = MutableStateFlow<List<Contact>>(emptyList())
             try {
                 contactsPhone = contactProvider.getPhoneContacts()
-            } catch (e: Exception) {        //todo runtime permissions
+            } catch (e: Exception) {
                 Log.d("myLog", "Catch! ${e.message}")
             }
 
@@ -51,10 +51,4 @@ class ContactService {
     fun getContact(index: Int): Contact {
         return contacts.value[index]
     }
-
-//    fun getContacts(): MutableStateFlow<List<Contact>> {
-//        return contacts
-//    }
-
-
 }

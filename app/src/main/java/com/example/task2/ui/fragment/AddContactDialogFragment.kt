@@ -6,15 +6,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.example.task2.data.ContactGenerator
-import com.example.task2.data.model.Contact
 import com.example.task2.databinding.DialogAddContactBinding
 import com.example.task2.ui.utils.ext.setContactPhoto
 
 class AddContactDialogFragment : DialogFragment() {
-
-    interface ConfirmationListener {        //todo interface -> separate file
-        fun onConfirmButtonClicked(contact: Contact)
-    }
 
     private lateinit var listener: ConfirmationListener
     private lateinit var _binding: DialogAddContactBinding
@@ -25,13 +20,16 @@ class AddContactDialogFragment : DialogFragment() {
         val builder = activity?.let { AlertDialog.Builder(it) }
             ?: throw IllegalStateException("Activity is null")
 
-        icBackListener()
-        saveButtonListener()
+        setListeners()
 
-
-        _binding.profilePhotoImageView.setContactPhoto()
+        _binding.imageViewProfilePhoto.setContactPhoto()
         builder.setView(_binding.root)
         return builder.create()
+    }
+
+    private fun setListeners() {
+        _binding.dialogImageViewBack.setOnClickListener { imageViewBackListener() }
+        _binding.dialogButtonSave.setOnClickListener { saveButtonListener() }
     }
 
     override fun onAttach(context: Context) {
@@ -45,23 +43,19 @@ class AddContactDialogFragment : DialogFragment() {
     }
 
     private fun saveButtonListener() {
-        _binding.saveButton.setOnClickListener {
-            listener.onConfirmButtonClicked(
-                with(_binding) {
-                    _contactGenerator.createContact(
-                        userName = usernameEditText.text.toString(),
-                        career = careerEditText.text.toString()
-                    )
-                }
-            )
-            dismiss()
-        }
+        listener.onConfirmButtonClicked(
+            with(_binding) {
+                _contactGenerator.createContact(
+                    userName = editTextUsername.text.toString(),
+                    career = editTextCareer.text.toString()
+                )
+            }
+        )
+        dismiss()
     }
 
-    private fun icBackListener() {
-        _binding.icBack.setOnClickListener {
-            dismiss()
-        }
+    private fun imageViewBackListener() {
+        dismiss()
     }
 
 

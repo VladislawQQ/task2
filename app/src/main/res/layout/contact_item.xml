@@ -1,73 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- todo: linear+linear  -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/margin_medium"
-    android:layout_marginHorizontal="@dimen/margin_medium"
     android:background="@drawable/contact_item_border"
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/margin_small"
     android:padding="@dimen/padding_small">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/profile_image"
-        android:layout_width="@dimen/contact_item_profile_photo_size"
-        android:layout_height="@dimen/contact_item_profile_photo_size"
-        android:src="@drawable/profile_photo"
+        android:id="@+id/image_view_contact_item_photo"
+        android:layout_width="@dimen/contact_item_size_profile_photo"
+        android:layout_height="@dimen/contact_item_size_profile_photo"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:src="@drawable/profile_photo"/>
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/flow_title_text"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:orientation="vertical"
-        app:constraint_referenced_ids="text_view_name, text_view_career"
-        app:flow_horizontalAlign="start"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        app:flow_verticalStyle="packed"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name_surname"
 
-        app:layout_constraintBottom_toBottomOf="@id/profile_image"
-        app:layout_constraintStart_toEndOf="@id/profile_image"
-        app:layout_constraintTop_toTopOf="@+id/profile_image" />
+            android:textAppearance="@style/open_sans_font"
+            android:textColor="@color/contact_item_name_color"
+            android:textSize="@dimen/contact_item_text_size_name" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_view_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/open_sans_font"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_career"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/career"
 
-        android:text="@string/name_surname"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_name" />
+            android:textAppearance="@style/open_sans_font"
+            android:textColor="@color/contact_item_career_color"
+            android:textSize="@dimen/contact_item_text_size_career"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/text_view_career"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/open_sans_font"
-
-        android:text="@string/career"
-        android:textColor="@color/gray_text"
-        android:textSize="@dimen/text_size_career"
-
-        app:layout_constraintStart_toStartOf="@+id/text_view_name"
-        app:layout_constraintTop_toBottomOf="@id/text_view_name" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_view_bucket"
-        android:layout_width="@dimen/contact_item_icon_delete_size"
-        android:layout_height="@dimen/contact_item_icon_delete_size"
+        android:layout_width="@dimen/contact_item_size_icon_delete"
+        android:layout_height="@dimen/contact_item_size_icon_delete"
         android:layout_margin="@dimen/margin_small"
 
-        android:src="@drawable/ic_delete"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/ic_delete"/>
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

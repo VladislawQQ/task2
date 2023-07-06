@@ -7,22 +7,16 @@
     </style>
 
     <style name="TextColor" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/gray_edit_text</item>
-        <item name="colorControlActivated">@color/gray_edit_text</item>
+        <item name="colorControlNormal">@color/text_input_layout_hint</item>
+        <item name="colorControlActivated">@color/contact_item_name_color</item>
     </style>
 
-    <style name="edit_text_auth_activity">
-        <!-- todo: layout_width/layout_height delete from styles  -->
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
-        <item name="android:theme">@style/TextColor</item>
-        <item name="barrierDirection">bottom</item>
-        <item name="hintAnimationEnabled">@string/name_surname</item>
-        <item name="hintEnabled">false</item>
-        <item name="hintTextColor">@color/gray_edit_text</item>
-        <item name="expandedHintEnabled">true</item>
-        <item name="android:textColorHint">@color/gray_edit_text</item>
+    <style name="TextInputLayout">
+        <item name="theme">@style/TextColor</item>
+        <item name="hintTextColor">@color/text_input_layout_hint</item>
+        <item name="android:layout_marginStart">@dimen/margin_medium</item>
+        <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+        <item name="android:layout_marginTop">@dimen/margin_small</item>
         <item name="boxBackgroundMode">none</item>
     </style>
 
