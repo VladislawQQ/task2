@@ -13,7 +13,7 @@
 
     <style name="TextInputLayout">
         <item name="theme">@style/TextColor</item>
-        <item name="hintTextColor">@color/text_input_layout_hint</item>
+        <item name="android:textColorHint">@color/text_input_layout_hint</item>
         <item name="android:layout_marginStart">@dimen/margin_medium</item>
         <item name="android:layout_marginEnd">@dimen/margin_medium</item>
         <item name="android:layout_marginTop">@dimen/margin_small</item>

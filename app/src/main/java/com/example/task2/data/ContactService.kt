@@ -48,6 +48,8 @@ class ContactService {
         }
     }
 
+    fun getContactIndex(contact: Contact) : Int = contacts.value.indexOf(contact)
+
     fun getContact(index: Int): Contact {
         return contacts.value[index]
     }

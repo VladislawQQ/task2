@@ -131,7 +131,7 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
         Snackbar.make(binding.root, R.string.message_delete, Snackbar.LENGTH_LONG)
             .setAction(getString(R.string.snackbar_action).uppercase()) {
                 contactViewModel.addContact(index, contact)
-            }.setActionTextColor(ContextCompat.getColor(applicationContext, R.color.contacts_activity_class_snackbar_undo_color))
+            }.setActionTextColor(ContextCompat.getColor(applicationContext, R.color.contacts_activity_class_snackbar_action_color))
             .setTextColor(ContextCompat.getColor(applicationContext, R.color.contacts_activity_class_snackbar_text_color))
             .show()
     }

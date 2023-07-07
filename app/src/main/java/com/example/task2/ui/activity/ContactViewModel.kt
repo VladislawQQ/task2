@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.task2.data.ContactService
 import com.example.task2.data.model.Contact
 import kotlinx.coroutines.flow.StateFlow
+import java.util.Collections
 
 class ContactViewModel : ViewModel() {
 
@@ -12,7 +13,7 @@ class ContactViewModel : ViewModel() {
 
     fun getContact(index: Int): Contact = contactService.getContact(index)
 
-    fun getContactIndex(contact: Contact) : Int = contact.id.toInt()
+    fun getContactIndex(contact: Contact) : Int = contactService.getContactIndex(contact)
 
     fun deleteContact(contact: Contact): Int = contactService.deleteContact(contact)
 

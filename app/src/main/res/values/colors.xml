@@ -6,5 +6,5 @@
     <color name="text_input_layout_hint">#B2B2B3</color>
     <color name="contact_item_career_color">#B2B2B3</color>
     <color name="contacts_activity_class_snackbar_text_color">#B2B2B3</color>
-    <color name="contacts_activity_class_snackbar_undo_color">#FF6200EE</color>
+    <color name="contacts_activity_class_snackbar_action_color">#FF6200EE</color>
 </resources>
