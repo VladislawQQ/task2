@@ -4,6 +4,7 @@ import android.util.Log
 
 const val TAG = "logTAG"
 
+// Todo try using Timber
 fun logExt(
     message: String
 ) {

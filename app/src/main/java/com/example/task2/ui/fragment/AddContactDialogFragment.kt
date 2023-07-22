@@ -5,8 +5,10 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.example.task2.data.ContactGenerator
 import com.example.task2.databinding.DialogAddContactBinding
+import com.example.task2.ui.activity.ContactViewModel
 import com.example.task2.ui.utils.ext.setContactPhoto
 
 class AddContactDialogFragment : DialogFragment() {
@@ -17,8 +19,7 @@ class AddContactDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _binding = DialogAddContactBinding.inflate(layoutInflater)
-        val builder = activity?.let { AlertDialog.Builder(it) }
-            ?: throw IllegalStateException("Activity is null")
+        val builder = AlertDialog.Builder(requireContext())
 
         setListeners()
 

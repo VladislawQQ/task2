@@ -5,29 +5,23 @@ import com.example.task2.App
 import com.example.task2.data.model.Contact
 import com.github.javafaker.Faker
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.Random
 import java.util.UUID
 
 class ContactGenerator {
     private val faker = Faker.instance()
 
-    fun generateContacts(): MutableStateFlow<List<Contact>> {
-        return MutableStateFlow(
-            List(15) { randomContact(id = UUID.randomUUID().mostSignificantBits) }
-            )
+    fun generateContacts(): List<Contact> {
+        return List(15) { randomContact(id = UUID.randomUUID().mostSignificantBits) }
     }
 
-    fun createContact(
-        userName: String,
-        career: String
-    ): Contact {
-        return Contact(
-            id = UUID.randomUUID().mostSignificantBits,
-            name = userName.ifBlank { faker.name().fullName() },
-            career = career,
-            photo = ""
-        )
-    }
+    fun createContact(userName: String, career: String) = Contact(
+        id = UUID.randomUUID().mostSignificantBits,
+        name = userName.ifBlank { faker.name().fullName() },
+        career = career,
+        photo = ""
+    )
 
     private fun randomContact(id: Long): Contact {
         return Contact(
@@ -38,15 +32,12 @@ class ContactGenerator {
         )
     }
 
-    fun getPhoneContacts(): MutableStateFlow<List<Contact>> {
-
-        val contacts = MutableStateFlow<List<Contact>>(emptyList())
-        val contactList : MutableList<Contact> = ArrayList()
-
+    fun getPhoneContacts(): List<Contact> {
         val contentResolver = App.contentResolverInstance
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
 
-        val cursor = contentResolver.query(uri,
+        val cursor = contentResolver.query(
+            uri,
             null,
             null,
             null,
@@ -57,6 +48,7 @@ class ContactGenerator {
         cursor?.use {
             if (cursor.count > 0) {
                 var id = 0L
+                val contactList: MutableList<Contact> = mutableListOf()
 
                 while (cursor.moveToNext()) {
                     val name = cursor.use { ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME }
@@ -65,11 +57,11 @@ class ContactGenerator {
 
                     contactList.add(contact)
                 }
-                contacts.value = contactList
+                return contactList
             }
         }
 
-        return contacts
+        return emptyList()
     }
 
     companion object {

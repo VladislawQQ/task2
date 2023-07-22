@@ -33,13 +33,6 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/content_top"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.03" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/content_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -64,12 +57,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/contacts"
-
         android:textAppearance="@style/open_sans_font"
         android:textSize="@dimen/activity_contacts_text_size_contacts_label"
         android:textColor="@color/label_text_color"
-
-        app:layout_constraintTop_toTopOf="@id/content_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_view_add_contact"
+        app:layout_constraintVertical_bias="0.15"
         app:layout_constraintStart_toEndOf="@id/activity_contacts_image_view_back"
         app:layout_constraintEnd_toStartOf="@id/image_view_search"
          />

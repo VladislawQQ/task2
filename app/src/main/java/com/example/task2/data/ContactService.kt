@@ -3,33 +3,35 @@ package com.example.task2.data
 import android.util.Log
 import com.example.task2.data.model.Contact
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class ContactService {
 
-    var contacts = MutableStateFlow<List<Contact>>(emptyList())
+    private val _contacts = MutableStateFlow<List<Contact>>(emptyList())
+    val contacts: StateFlow<List<Contact>> = _contacts
+
     private val contactProvider = ContactGenerator()
 
     init {
         if (contacts.value.isEmpty()) {
-            var contactsPhone = MutableStateFlow<List<Contact>>(emptyList())
-            try {
-                contactsPhone = contactProvider.getPhoneContacts()
+            val contactsPhone = try {
+                contactProvider.getPhoneContacts()
             } catch (e: Exception) {
                 Log.d("myLog", "Catch! ${e.message}")
+                emptyList()
             }
 
-            contacts =
-                if (contactsPhone.value.isNotEmpty()) contactsPhone
-                    else
-                        contactProvider.generateContacts()
+            _contacts.value = contactsPhone.ifEmpty {
+                contactProvider.generateContacts()
+            }
         }
     }
 
     fun deleteContact(contact: Contact): Int {
-        val indexToDelete : Int
+        val indexToDelete: Int
 
-        contacts.value = contacts.value.toMutableList().apply {
-            indexToDelete  = indexOf(contact)
+        _contacts.value = contacts.value.toMutableList().apply {
+            indexToDelete = indexOf(contact)
             remove(contact)
         }
 
@@ -37,18 +39,18 @@ class ContactService {
     }
 
     fun addContact(contact: Contact) {
-        contacts.value = contacts.value.toMutableList().apply {
+        _contacts.value = contacts.value.toMutableList().apply {
             add(contact)
         }
     }
 
     fun addContact(index: Int, contact: Contact) {
-        contacts.value = contacts.value.toMutableList().apply {
+        _contacts.value = contacts.value.toMutableList().apply {
             add(index, contact)
         }
     }
 
-    fun getContactIndex(contact: Contact) : Int = contacts.value.indexOf(contact)
+    fun getContactIndex(contact: Contact): Int = contacts.value.indexOf(contact)
 
     fun getContact(index: Int): Contact {
         return contacts.value[index]

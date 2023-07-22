@@ -1,5 +1,6 @@
 package com.example.task2.ui.activity
 
+import android.Manifest.permission.READ_CONTACTS
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -27,10 +28,10 @@ import kotlinx.coroutines.launch
 class ContactsActivity : AppCompatActivity(), ConfirmationListener {
 
     private lateinit var binding: ActivityContactsBinding
-    private lateinit var adapter: ContactAdapter
-    private var READ_CONTACTS_GRANTED = false
+    private lateinit var contactAdapter: ContactAdapter
+//    private var READ_CONTACTS_GRANTED = false
 
-    private val contactViewModel : ContactViewModel by viewModels()
+    private val contactViewModel: ContactViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,14 +40,14 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
 
         askPermission()
 
-        if (READ_CONTACTS_GRANTED) {
-            bindRecycleView()
-            observeViewModel()
-            addSwipeToDelete()
-            setListeners()
-        } else {
-            showToastPermission()
-        }
+//        if (READ_CONTACTS_GRANTED) {
+//            bindRecycleView()
+//            observeViewModel()
+//            addSwipeToDelete()
+//            setListeners()
+//        } else {
+//            showToastPermission()
+//        }
     }
 
     private fun showToastPermission() {
@@ -56,13 +57,19 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
     }
 
     private fun askPermission() {
-        val hasReadContactPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
+        val hasReadContactPermission = ContextCompat.checkSelfPermission(this, READ_CONTACTS)
 
         if (hasReadContactPermission == PackageManager.PERMISSION_GRANTED) {
-            READ_CONTACTS_GRANTED = true
+            bindRecycleView()
+            observeViewModel()
+            addSwipeToDelete()
+            setListeners()
         } else {
-            ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.READ_CONTACTS), 1)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(READ_CONTACTS), 1
+            )
+            showToastPermission()
         }
     }
 
@@ -81,7 +88,7 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
     }
 
     private fun bindRecycleView() {
-        adapter = ContactAdapter(contactActionListener = object : ContactActionListener {
+        contactAdapter = ContactAdapter(contactActionListener = object : ContactActionListener {
             override fun onContactDelete(contact: Contact) {
                 val index = contactViewModel.getContactIndex(contact)
                 contactViewModel.deleteContact(contact)
@@ -89,33 +96,38 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
             }
         })
 
-        val recyclerLayoutManager = LinearLayoutManager(this)
-        with(binding){
-            recyclerViewContacts.layoutManager = recyclerLayoutManager
-            recyclerViewContacts.adapter = adapter
+        with(binding.recyclerViewContacts) {
+            layoutManager = LinearLayoutManager(
+                this@ContactsActivity,
+                LinearLayoutManager.VERTICAL,
+                false
+            )
+            adapter = contactAdapter
         }
-
     }
 
     private fun observeViewModel() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 contactViewModel.contacts.collect {
-                    adapter.submitList(it)
+                    contactAdapter.submitList(it)
                 }
             }
         }
     }
 
     private fun addSwipeToDelete() {
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
-            ItemTouchHelper.END or ItemTouchHelper.START) {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
+            0,
+            ItemTouchHelper.END or ItemTouchHelper.START
+        ) {
 
             override fun onMove(
                 recyclerView: RecyclerView,
                 viewHolder: ViewHolder,
-                target: ViewHolder)
-            : Boolean = false
+                target: ViewHolder
+            )
+                    : Boolean = false
 
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 val index = viewHolder.adapterPosition
@@ -131,8 +143,18 @@ class ContactsActivity : AppCompatActivity(), ConfirmationListener {
         Snackbar.make(binding.root, R.string.message_delete, Snackbar.LENGTH_LONG)
             .setAction(getString(R.string.snackbar_action).uppercase()) {
                 contactViewModel.addContact(index, contact)
-            }.setActionTextColor(ContextCompat.getColor(applicationContext, R.color.contacts_activity_class_snackbar_action_color))
-            .setTextColor(ContextCompat.getColor(applicationContext, R.color.contacts_activity_class_snackbar_text_color))
+            }.setActionTextColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.contacts_activity_class_snackbar_action_color
+                )
+            )
+            .setTextColor(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.contacts_activity_class_snackbar_text_color
+                )
+            )
             .show()
     }
 

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.task2.data.ContactService
 import com.example.task2.data.model.Contact
 import kotlinx.coroutines.flow.StateFlow
-import java.util.Collections
 
 class ContactViewModel : ViewModel() {
 

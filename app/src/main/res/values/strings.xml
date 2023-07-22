@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">task2</string>
 
-    // Activity contacts and contact item
+    <!-- Activity contacts and contact item -->
     <string name="name_surname">Name Surname</string>
     <string name="career">Career</string>
     <string name="add_contacts">Add contacts</string>
     <string name="contacts">Contacts</string>
 
-    // Snackbar messages
+    <!--  Snackbar messages -->
     <string name="message_delete">Contact has been deleted</string>
     <string name="message_add_contact">Contact has been added</string>
     <string name="snackbar_action">undo</string>
 
-    // Dialog add contact
+    <!--  Dialog add contact -->
     <string name="add_contact">Add contact</string>
     <string name="save">Save</string>
     <string name="email">Email</string>
